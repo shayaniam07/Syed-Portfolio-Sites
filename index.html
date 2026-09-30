@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio Websites — Clean, Fast &amp; Ready to Share | Syed</title>
+  <meta name="description" content="Clean, fast portfolio websites — built, hosted live and delivered in 48–72 hours. Starter at $100, Pro with custom domain at $200.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="Clean, fast portfolio websites — ready to share">
+  <meta property="og:description" content="I build your portfolio website, host it live and deliver in 48–72 hours. Starter $100 · Pro + Domain $200.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f6f7f9;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #e5e7eb;
+      --accent: #4f46e5;
+      --accent-dark: #3730a3;
+      --wa: #128c4a;
+      --wa-dark: #0d6e3a;
+      --radius: 16px;
+      --shadow: 0 1px 2px rgba(15,23,42,.05), 0 8px 24px rgba(15,23,42,.06);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -0.02em; }
+    p { margin: 0; }
+    ul { margin: 0; padding: 0; list-style: none; }
+
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+    .container { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+    .skip {
+      position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff;
+      padding: .6rem 1rem; border-radius: 8px; z-index: 100;
+    }
+    .skip:focus { left: 8px; }
+
+    /* Icons */
+    .icon { width: 20px; height: 20px; fill: currentColor; flex: none; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: .85rem 1.4rem; border-radius: 999px; font-weight: 600; font-size: 1rem;
+      text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn-wa { background: var(--wa); color: #fff; box-shadow: 0 6px 18px rgba(18,140,74,.25); }
+    .btn-wa:hover { background: var(--wa-dark); }
+    .btn-outline { background: #fff; color: var(--ink); border-color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: #fff; }
+    .btn-sm { padding: .55rem 1rem; font-size: .92rem; }
+    .btn-block { width: 100%; }
+
+    /* Header */
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 1rem; }
+    .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 700; text-decoration: none; letter-spacing: -0.01em; }
+    .brand-mark {
+      width: 32px; height: 32px; border-radius: 10px; background: var(--ink); color: #fff;
+      display: grid; place-items: center; font-size: .95rem; font-weight: 700;
+    }
+    .nav-links { display: flex; align-items: center; gap: .25rem; }
+    .nav-links a.link {
+      text-decoration: none; color: var(--muted); font-weight: 500; font-size: .95rem;
+      padding: .5rem .8rem; border-radius: 8px; transition: color .15s, background-color .15s;
+    }
+    .nav-links a.link:hover { color: var(--ink); background: var(--bg-soft); }
+    .nav-cta { display: flex; align-items: center; gap: .6rem; }
+    .menu-btn {
+      display: none; background: none; border: 1.5px solid var(--line); border-radius: 10px;
+      width: 44px; height: 44px; cursor: pointer; color: var(--ink); place-items: center;
+    }
+    .menu-btn:hover { background: var(--bg-soft); }
+
+    @media (max-width: 900px) {
+      .menu-btn { display: grid; }
+      .nav-links {
+        position: absolute; top: 68px; left: 0; right: 0; background: #fff;
+        flex-direction: column; align-items: stretch; padding: .75rem 1.25rem 1.25rem;
+        border-bottom: 1px solid var(--line); box-shadow: 0 16px 24px rgba(15,23,42,.08);
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a.link { padding: .85rem .75rem; font-size: 1.05rem; }
+      .nav-cta .btn-li-desktop { display: none; }
+      .nav-links .mobile-li { display: inline-flex; margin-top: .5rem; }
+    }
+    @media (min-width: 901px) { .nav-links .mobile-li { display: none; } }
+
+    /* Hero */
+    .hero { padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(3rem, 7vw, 5rem); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; inset: -200px -10% auto auto; width: 620px; height: 620px;
+      background: radial-gradient(closest-side, rgba(79,70,229,.12), transparent); z-index: -1;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem; font-size: .85rem; font-weight: 600;
+      color: var(--accent-dark); background: #eef2ff; padding: .35rem .8rem; border-radius: 999px; margin-bottom: 1.25rem;
+    }
+    .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    .hero h1 { font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 800; }
+    .hero h1 span { color: var(--accent); }
+    .hero p.lead { margin-top: 1.4rem; font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--muted); max-width: 40ch; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+    .hero-meta { margin-top: 1.4rem; font-size: .92rem; color: var(--muted); }
+    .hero-meta a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+    .hero-meta a:hover { color: var(--accent); }
+
+    .mock {
+      background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden;
+      transform: rotate(1.5deg);
+    }
+    .mock-bar { display: flex; gap: 6px; padding: .8rem 1rem; border-bottom: 1px solid var(--line); background: var(--bg-soft); }
+    .mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; }
+    .mock-body { padding: 1.4rem; display: grid; gap: .9rem; }
+    .sk { background: #e2e8f0; border-radius: 8px; }
+    .sk.dark { background: var(--ink); }
+    .sk.acc { background: var(--accent); }
+
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .mock { transform: none; max-width: 460px; }
+    }
+
+    /* Trust strip */
+    .trust { border-block: 1px solid var(--line); background: var(--bg-soft); }
+    .trust ul { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 2rem; padding: 1.1rem 0; font-weight: 600; font-size: .95rem; color: var(--muted); }
+    .trust li { display: inline-flex; align-items: center; gap: .5rem; }
+    .trust li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    /* Sections */
+    section.block { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
+    section.soft { background: var(--bg-soft); }
+    .sec-head { max-width: 640px; margin-bottom: 3rem; }
+    .sec-head.center { margin-inline: auto; text-align: center; }
+    .kicker { font-size: .85rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: .8rem; }
+    .sec-head h2 { font-size: clamp(1.8rem, 4vw, 2.75rem); font-weight: 800; }
+    .sec-head p { margin-top: 1rem; color: var(--muted); font-size: 1.08rem; }
+
+    /* Pricing */
+    .pricing { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 860px; margin-inline: auto; }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 2rem; position: relative;
+      display: flex; flex-direction: column; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .card.featured { border: 2px solid var(--accent); box-shadow: var(--shadow); }
+    .badge {
+      position: absolute; top: -13px; left: 2rem; background: var(--accent); color: #fff;
+      font-size: .78rem; font-weight: 700; padding: .3rem .8rem; border-radius: 999px;
+    }
+    .card h3 { font-size: 1.25rem; font-weight: 700; }
+    .price { margin: 1rem 0 .4rem; font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; }
+    .price small { font-size: 1rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+    .card .desc { color: var(--muted); font-size: .97rem; }
+    .features { margin: 1.5rem 0 2rem; display: grid; gap: .8rem; flex: 1; }
+    .features li { display: flex; gap: .7rem; align-items: flex-start; font-size: .98rem; }
+    .features svg { width: 20px; height: 20px; margin-top: 2px; color: var(--accent); flex: none; }
+    .price-note { text-align: center; margin-top: 1.5rem; color: var(--muted); font-size: .95rem; }
+    @media (max-width: 760px) { .pricing { grid-template-columns: 1fr; } }
+
+    /* Steps */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; counter-reset: step; }
+    .step { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; }
+    .step .num {
+      width: 40px; height: 40px; border-radius: 12px; background: var(--ink); color: #fff;
+      display: grid; place-items: center; font-weight: 700; margin-bottom: 1rem;
+    }
+    .step h3 { font-size: 1.1rem; margin-bottom: .5rem; }
+    .step p { color: var(--muted); font-size: .96rem; }
+    @media (max-width: 960px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+    /* Examples */
+    .examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .ex {
+      display: block; text-decoration: none; background: #fff; border: 1px solid var(--line);
+      border-radius: var(--radius); overflow: hidden; transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .ex:hover, .ex:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .ex-thumb { aspect-ratio: 16 / 10; display: block; width: 100%; }
+    .ex-info { padding: 1.1rem 1.25rem 1.3rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .ex-info h3 { font-size: 1.05rem; }
+    .ex-info p { font-size: .88rem; color: var(--muted); margin-top: .15rem; }
+    .ex-info svg { width: 20px; height: 20px; color: var(--muted); transition: transform .2s, color .2s; flex: none; }
+    .ex:hover .ex-info svg { transform: translateX(4px); color: var(--accent); }
+    .ex-note { margin-top: 1.5rem; text-align: center; color: var(--muted); font-size: .92rem; }
+    @media (max-width: 960px) { .examples { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .examples { grid-template-columns: 1fr; } }
+
+    /* FAQ */
+    .faq { max-width: 760px; margin-inline: auto; display: grid; gap: .8rem; }
+    .faq details { background: #fff; border: 1px solid var(--line); border-radius: 14px; transition: border-color .15s, box-shadow .15s; }
+    .faq details[open] { border-color: #c7d2fe; box-shadow: var(--shadow); }
+    .faq summary {
+      list-style: none; cursor: pointer; padding: 1.2rem 1.4rem; font-weight: 600; font-size: 1.04rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-radius: 14px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--accent-dark); }
+    .faq summary::after {
+      content: "+"; font-size: 1.5rem; font-weight: 400; line-height: 1; color: var(--accent); transition: transform .2s; flex: none;
+    }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq .ans { padding: 0 1.4rem 1.3rem; color: var(--muted); }
+
+    /* Contact */
+    .contact-card {
+      background: var(--ink); color: #fff; border-radius: 28px; padding: clamp(2rem, 6vw, 4rem);
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center;
+    }
+    .contact-card h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 800; }
+    .contact-card p.sub { margin-top: 1rem; color: #cbd5e1; font-size: 1.08rem; max-width: 42ch; }
+    .contact-card .cta-row { margin-top: 1.8rem; }
+    .contact-card .btn-outline { background: transparent; color: #fff; border-color: #fff; }
+    .contact-card .btn-outline:hover { background: #fff; color: var(--ink); }
+    .contact-list { display: grid; gap: .8rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border-radius: 14px; text-decoration: none;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+      transition: background-color .15s, transform .15s, border-color .15s;
+    }
+    .contact-item:hover { background: rgba(255,255,255,.14); transform: translateX(4px); border-color: rgba(255,255,255,.3); }
+    .contact-item .ic { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.12); display: grid; place-items: center; flex: none; }
+    .contact-item small { display: block; color: #cbd5e1; font-size: .8rem; }
+    .contact-item strong { font-size: 1rem; word-break: break-word; }
+    .contact-card :focus-visible { outline-color: #fff; }
+    @media (max-width: 860px) { .contact-card { grid-template-columns: 1fr; gap: 2rem; } }
+
+    /* Footer */
+    footer.site { padding: 2rem 0 3rem; color: var(--muted); font-size: .92rem; }
+    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; }
+    .foot ul { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+    .foot a { text-decoration: none; }
+    .foot a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Floating WhatsApp (mobile) */
+    .fab {
+      position: fixed; right: 16px; bottom: 16px; z-index: 40; width: 56px; height: 56px; border-radius: 50%;
+      background: var(--wa); color: #fff; display: none; place-items: center; box-shadow: 0 8px 24px rgba(18,140,74,.4);
+      transition: transform .15s, background-color .15s;
+    }
+    .fab:hover { transform: scale(1.06); background: var(--wa-dark); }
+    .fab .icon { width: 28px; height: 28px; }
+    @media (max-width: 760px) { .fab { display: grid; } }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .no-js .reveal { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body class="no-js">
+  <!-- Inline SVG icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2.6V17h16V7.6l-8 5.2-8-5.2ZM5.3 7l6.7 4.4L18.7 7H5.3Z"/></symbol>
+      <symbol id="i-li" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Syed — Portfolio Websites, home">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>Syed · Portfolio Sites</span>
+      </a>
+
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
+        <a class="link" href="#home">Home</a>
+        <a class="link" href="#pricing">Pricing</a>
+        <a class="link" href="#examples">Examples</a>
+        <a class="link" href="#faq">FAQ</a>
+        <a class="link" href="#contact">Contact</a>
+        <a class="btn btn-outline btn-sm mobile-li" href="https://www.linkedin.com/in/syed-shayan-2999513b9" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" aria-hidden="true"><use href="#i-li"/></svg> Connect on LinkedIn
+        </a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn btn-outline btn-sm btn-li-desktop" href="https://www.linkedin.com/in/syed-shayan-2999513b9" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" aria-hidden="true"><use href="#i-li"/></svg> Connect on LinkedIn
+        </a>
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
+          <svg class="icon" id="menu-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span> Taking new projects this week</span>
+          <h1 id="hero-title">Clean, fast portfolio websites — <span>ready to share</span></h1>
+          <p class="lead">I design and build your portfolio, host it live on the web, and deliver it quickly — so you can send one clean link to clients and employers.</p>
+          <div class="cta-row">
+            <a class="btn btn-wa" href="https://wa.me/12792401004?text=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20I%E2%80%99m%20interested%20in%20the%20%24100%20or%20%24200%20package." target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg> Chat on WhatsApp
+            </a>
+            <a class="btn btn-outline" href="mailto:shayaniam07@gmail.com?subject=Portfolio%20Website%20Request&body=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20My%20name%3A%20%0AIndustry%3A%20%0APackage%20(%24100%2F%24200)%3A%20%0ADeadline%3A%20">
+              <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> Email me
+            </a>
+          </div>
+          <p class="hero-meta">Delivery in 48–72 hours · From $100 · Prefer LinkedIn? <a href="https://www.linkedin.com/in/syed-shayan-2999513b9" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a></p>
+        </div>
+
+        <div class="mock" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-body">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="sk dark" style="width:70px;height:14px"></div>
+              <div style="display:flex;gap:8px"><div class="sk" style="width:36px;height:10px"></div><div class="sk" style="width:36px;height:10px"></div><div class="sk" style="width:36px;height:10px"></div></div>
+            </div>
+            <div class="sk dark" style="width:85%;height:26px;margin-top:14px"></div>
+            <div class="sk dark" style="width:60%;height:26px"></div>
+            <div class="sk" style="width:75%;height:10px;margin-top:6px"></div>
+            <div class="sk acc" style="width:110px;height:32px;border-radius:999px"></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
+              <div class="sk" style="aspect-ratio:1"></div><div class="sk" style="aspect-ratio:1"></div><div class="sk" style="aspect-ratio:1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <div class="trust" aria-label="Why choose this service">
+      <div class="container">
+        <ul>
+          <li>Fast delivery</li>
+          <li>Mobile-first</li>
+          <li>Easy to share</li>
+          <li>Clean design</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <section class="block" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="kicker">Pricing</p>
+          <h2 id="pricing-title">Two simple packages. No surprises.</h2>
+          <p>One flat price, everything included. Pick the one that fits and I’ll get started.</p>
+        </div>
+
+        <div class="pricing">
+          <article class="card reveal" aria-labelledby="starter-title">
+            <h3 id="starter-title">Starter Portfolio</h3>
+            <p class="price">$100 <small>one-time</small></p>
+            <p class="desc">Everything you need to get online fast.</p>
+            <ul class="features">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> One-page portfolio (sections: About, Work, Contact)</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Mobile responsive + fast</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Hosted live (GitHub Pages or Vercel)</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> 2 revisions</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Delivery: 48–72 hours</li>
+            </ul>
+            <a class="btn btn-outline btn-block" href="https://wa.me/12792401004?text=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20I%E2%80%99m%20interested%20in%20the%20%24100%20or%20%24200%20package." target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg> Chat on WhatsApp
+            </a>
+          </article>
+
+          <article class="card featured reveal" aria-labelledby="pro-title">
+            <span class="badge">Most popular</span>
+            <h3 id="pro-title">Pro Portfolio + Domain</h3>
+            <p class="price">$200 <small>one-time</small></p>
+            <p class="desc">Your own web address, fully set up.</p>
+            <ul class="features">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Everything in Starter</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Custom domain setup included (I help connect your domain + DNS)</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> SSL + basic SEO setup</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg> Priority delivery</li>
+            </ul>
+            <a class="btn btn-wa btn-block" href="https://wa.me/12792401004?text=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20I%E2%80%99m%20interested%20in%20the%20%24100%20or%20%24200%20package." target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg> Chat on WhatsApp
+            </a>
+          </article>
+        </div>
+        <p class="price-note">Domain registration fee is paid directly to your registrar. Prefer email? <a href="mailto:shayaniam07@gmail.com?subject=Portfolio%20Website%20Request&body=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20My%20name%3A%20%0AIndustry%3A%20%0APackage%20(%24100%2F%24200)%3A%20%0ADeadline%3A%20" style="font-weight:600;text-underline-offset:3px">Email me</a>.</p>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="block soft" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="kicker">How it works</p>
+          <h2 id="how-title">From message to live website in four steps</h2>
+        </div>
+        <ol class="steps" style="list-style:none;margin:0;padding:0">
+          <li class="step reveal"><div class="num" aria-hidden="true">1</div><h3>Say hello</h3><p>Message me on WhatsApp or email with your name, industry and preferred package.</p></li>
+          <li class="step reveal"><div class="num" aria-hidden="true">2</div><h3>Share your content</h3><p>Send a short bio, your best work, photos or links, and your contact details.</p></li>
+          <li class="step reveal"><div class="num" aria-hidden="true">3</div><h3>I build &amp; preview</h3><p>I design your site and send a live preview within 48–72 hours. You request tweaks.</p></li>
+          <li class="step reveal"><div class="num" aria-hidden="true">4</div><h3>Go live &amp; share</h3><p>I publish it, connect your domain (Pro), and hand over your link ready to share.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- EXAMPLES -->
+    <section class="block" id="examples" aria-labelledby="examples-title">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="kicker">Work / Examples</p>
+          <h2 id="examples-title">Styles for every kind of creator</h2>
+          <p>Placeholder layouts to show the direction. Yours will be tailored to your work and personality.</p>
+        </div>
+
+        <div class="examples">
+          <a class="ex reveal" href="#contact">
+            <svg class="ex-thumb" viewBox="0 0 320 200" role="img" aria-label="Placeholder preview of a designer portfolio"><rect width="320" height="200" fill="#eef2ff"/><rect x="24" y="24" width="60" height="8" rx="4" fill="#4f46e5"/><rect x="24" y="56" width="170" height="16" rx="5" fill="#0f172a"/><rect x="24" y="80" width="120" height="16" rx="5" fill="#0f172a"/><rect x="24" y="110" width="80" height="24" rx="12" fill="#4f46e5"/><circle cx="250" cy="100" r="48" fill="#c7d2fe"/><rect x="220" y="150" width="76" height="26" rx="8" fill="#a5b4fc"/></svg>
+            <div class="ex-info"><div><h3>Designer Portfolio</h3><p>Bold, visual, case-study led</p></div><svg aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          </a>
+          <a class="ex reveal" href="#contact">
+            <svg class="ex-thumb" viewBox="0 0 320 200" role="img" aria-label="Placeholder preview of a developer portfolio"><rect width="320" height="200" fill="#0f172a"/><rect x="24" y="24" width="8" height="8" rx="4" fill="#f87171"/><rect x="40" y="24" width="8" height="8" rx="4" fill="#fbbf24"/><rect x="56" y="24" width="8" height="8" rx="4" fill="#34d399"/><rect x="24" y="56" width="90" height="8" rx="4" fill="#818cf8"/><rect x="24" y="76" width="200" height="8" rx="4" fill="#64748b"/><rect x="40" y="96" width="150" height="8" rx="4" fill="#34d399"/><rect x="40" y="116" width="180" height="8" rx="4" fill="#64748b"/><rect x="24" y="136" width="110" height="8" rx="4" fill="#818cf8"/><rect x="24" y="162" width="70" height="20" rx="10" fill="#4f46e5"/></svg>
+            <div class="ex-info"><div><h3>Developer Portfolio</h3><p>Projects, stack &amp; GitHub links</p></div><svg aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          </a>
+          <a class="ex reveal" href="#contact">
+            <svg class="ex-thumb" viewBox="0 0 320 200" role="img" aria-label="Placeholder preview of a photographer portfolio"><rect width="320" height="200" fill="#f1f5f9"/><rect x="20" y="20" width="136" height="100" rx="6" fill="#cbd5e1"/><rect x="164" y="20" width="136" height="48" rx="6" fill="#94a3b8"/><rect x="164" y="76" width="64" height="44" rx="6" fill="#e2e8f0"/><rect x="236" y="76" width="64" height="44" rx="6" fill="#cbd5e1"/><rect x="20" y="132" width="90" height="10" rx="5" fill="#0f172a"/><rect x="20" y="152" width="140" height="8" rx="4" fill="#94a3b8"/></svg>
+            <div class="ex-info"><div><h3>Photographer Portfolio</h3><p>Full-bleed galleries that load fast</p></div><svg aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          </a>
+          <a class="ex reveal" href="#contact">
+            <svg class="ex-thumb" viewBox="0 0 320 200" role="img" aria-label="Placeholder preview of a writer portfolio"><rect width="320" height="200" fill="#fffbeb"/><rect x="40" y="28" width="120" height="14" rx="5" fill="#0f172a"/><rect x="40" y="58" width="240" height="7" rx="3.5" fill="#94a3b8"/><rect x="40" y="74" width="220" height="7" rx="3.5" fill="#94a3b8"/><rect x="40" y="90" width="236" height="7" rx="3.5" fill="#94a3b8"/><rect x="40" y="116" width="110" height="52" rx="8" fill="#fde68a"/><rect x="170" y="116" width="110" height="52" rx="8" fill="#fcd34d"/></svg>
+            <div class="ex-info"><div><h3>Writer Portfolio</h3><p>Clippings, bio &amp; contact</p></div><svg aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          </a>
+          <a class="ex reveal" href="#contact">
+            <svg class="ex-thumb" viewBox="0 0 320 200" role="img" aria-label="Placeholder preview of a freelancer portfolio"><rect width="320" height="200" fill="#ecfdf5"/><circle cx="60" cy="60" r="26" fill="#6ee7b7"/><rect x="100" y="46" width="110" height="12" rx="5" fill="#0f172a"/><rect x="100" y="66" width="80" height="8" rx="4" fill="#64748b"/><rect x="28" y="110" width="80" height="60" rx="8" fill="#a7f3d0"/><rect x="120" y="110" width="80" height="60" rx="8" fill="#6ee7b7"/><rect x="212" y="110" width="80" height="60" rx="8" fill="#34d399"/></svg>
+            <div class="ex-info"><div><h3>Freelancer Portfolio</h3><p>Services, proof &amp; testimonials</p></div><svg aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          </a>
+          <a class="ex reveal" href="#contact">
+            <svg class="ex-thumb" viewBox="0 0 320 200" role="img" aria-label="Placeholder preview of a student or resume portfolio"><rect width="320" height="200" fill="#fdf2f8"/><rect x="28" y="28" width="100" height="144" rx="8" fill="#fff" stroke="#fbcfe8"/><rect x="40" y="42" width="50" height="8" rx="4" fill="#db2777"/><rect x="40" y="62" width="76" height="6" rx="3" fill="#cbd5e1"/><rect x="40" y="76" width="70" height="6" rx="3" fill="#cbd5e1"/><rect x="40" y="90" width="76" height="6" rx="3" fill="#cbd5e1"/><rect x="148" y="28" width="144" height="64" rx="8" fill="#fbcfe8"/><rect x="148" y="108" width="144" height="64" rx="8" fill="#f9a8d4"/></svg>
+            <div class="ex-info"><div><h3>Student / Resume Portfolio</h3><p>Showcase skills &amp; projects</p></div><svg aria-hidden="true"><use href="#i-arrow"/></svg></div>
+          </a>
+        </div>
+        <p class="ex-note">Like a style? <a href="#contact" style="font-weight:600;text-underline-offset:3px">Get in touch</a> and mention it.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block soft" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="kicker">FAQ</p>
+          <h2 id="faq-title">Questions, answered</h2>
+        </div>
+        <div class="faq">
+          <details class="reveal" open>
+            <summary>How long does it take?</summary>
+            <div class="ans">The Starter package is delivered in 48–72 hours after I receive your content. Pro gets priority delivery, so it’s typically at the faster end of that window.</div>
+          </details>
+          <details class="reveal">
+            <summary>What do you need from me?</summary>
+            <div class="ans">A short bio, your best work (links, images or descriptions), your contact details and any colors or sites you like. Don’t have everything? Send what you have and I’ll help shape the rest.</div>
+          </details>
+          <details class="reveal">
+            <summary>Can I make edits after delivery?</summary>
+            <div class="ans">Both packages include 2 revision rounds before launch. After that, small updates are available at a friendly rate — just message me.</div>
+          </details>
+          <details class="reveal">
+            <summary>Where is the site hosted?</summary>
+            <div class="ans">Your site is hosted live on GitHub Pages or Vercel — fast, reliable and free to keep running. I’ll set it up and share the link with you.</div>
+          </details>
+          <details class="reveal">
+            <summary>Do I need to buy a domain?</summary>
+            <div class="ans">Not for Starter — you get a free shareable link. With Pro, I help you connect your own domain (like yourname.com) including DNS and SSL. You purchase the domain from a registrar of your choice; I’ll guide you.</div>
+          </details>
+          <details class="reveal">
+            <summary>What’s your refund policy?</summary>
+            <div class="ans">If I haven’t started work, you get a full refund. If you’re not happy with the first preview and we can’t get it right within the included revisions, I’ll discuss a fair partial refund. Your satisfaction matters.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="block" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div>
+            <p class="kicker" style="color:#a5b4fc">Contact</p>
+            <h2 id="contact-title">Let’s get your portfolio live.</h2>
+            <p class="sub">Tell me your name, industry, package ($100 or $200) and deadline. I usually reply within a few hours.</p>
+            <div class="cta-row">
+              <a class="btn btn-wa" href="https://wa.me/12792401004?text=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20I%E2%80%99m%20interested%20in%20the%20%24100%20or%20%24200%20package." target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg> Chat on WhatsApp
+              </a>
+              <a class="btn btn-outline" href="mailto:shayaniam07@gmail.com?subject=Portfolio%20Website%20Request&body=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20My%20name%3A%20%0AIndustry%3A%20%0APackage%20(%24100%2F%24200)%3A%20%0ADeadline%3A%20">
+                <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> Email me
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <a class="contact-item" href="https://wa.me/12792401004?text=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20I%E2%80%99m%20interested%20in%20the%20%24100%20or%20%24200%20package." target="_blank" rel="noopener noreferrer">
+              <span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg></span>
+              <span><small>WhatsApp</small><strong>+1 279 240 1004</strong></span>
+            </a>
+            <a class="contact-item" href="mailto:shayaniam07@gmail.com?subject=Portfolio%20Website%20Request&body=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20My%20name%3A%20%0AIndustry%3A%20%0APackage%20(%24100%2F%24200)%3A%20%0ADeadline%3A%20">
+              <span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+              <span><small>Email</small><strong>shayaniam07@gmail.com</strong></span>
+            </a>
+            <a class="contact-item" href="https://www.linkedin.com/in/syed-shayan-2999513b9" target="_blank" rel="noopener noreferrer">
+              <span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-li"/></svg></span>
+              <span><small>LinkedIn</small><strong>Connect on LinkedIn</strong></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="container foot">
+      <p>© <span id="year">2026</span> Syed · Portfolio Websites</p>
+      <ul aria-label="Footer links">
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://www.linkedin.com/in/syed-shayan-2999513b9" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a></li>
+        <li><a href="#home">Back to top ↑</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <a class="fab" href="https://wa.me/12792401004?text=Hi%20Syed%2C%20I%20want%20a%20portfolio%20website.%20I%E2%80%99m%20interested%20in%20the%20%24100%20or%20%24200%20package." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
+  </a>
+
+  <script>
+    (function () {
+      document.body.classList.remove('no-js');
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Mobile menu
+      var btn = document.getElementById('menu-btn');
+      var nav = document.getElementById('primary-nav');
+      function setMenu(open) {
+        nav.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      }
+      btn.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+      nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); btn.focus(); }
+      });
+
+      // Reveal on scroll
+      var items = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(function (el) { io.observe(el); });
+      } else {
+        items.forEach(function (el) { el.classList.add('in'); });
+      }
+    })();
+  </script>
+</body>
+</html>
